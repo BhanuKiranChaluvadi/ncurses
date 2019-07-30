@@ -25,9 +25,18 @@ int main(){
 
     mvwprintw(win1, 1, 1, "HELLO");
     wrefresh(win1);
+
+    sleep(1);
+
+    mvwprintw(win2, 1, 1, "HELLO");
+    wrefresh(win2);
+
+    // refresh();
     wgetch(win1); //Pause
+    wgetch(win2); //Pause
 
     delwin(win1);
+    delwin(win2);
     endwin();
 
     return 0;
