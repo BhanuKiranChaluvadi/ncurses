@@ -7,7 +7,7 @@
 
 using namespace std;
 
-WINDOW *create_newwin(int height, int width, int starty, int startx);
+WINDOW *create_newwin(int height=10, int width=10, int starty=0, int startx=0);
 
 int main(){
     initscr();
@@ -17,8 +17,11 @@ int main(){
     getmaxyx(stdscr,yMax,xMax);
 
     WINDOW *win1, *win2;
-    win1 = create_newwin(10, xMax-1, 0, 0);
-    win2 = create_newwin(10, xMax-1, 10, 0);
+    // win1 = create_newwin(10, xMax-1, 0, 0);
+    // win2 = create_newwin(10, xMax-1, 10, 0);
+
+    win1 = create_newwin(10, 10, 0, 0);
+    win2 = create_newwin(10, 10, 10, 10);
 
     box(win1,0,0);
     box(win2,0,0);
@@ -31,7 +34,6 @@ int main(){
     mvwprintw(win2, 1, 1, "HELLO");
     wrefresh(win2);
 
-    // refresh();
     wgetch(win1); //Pause
     wgetch(win2); //Pause
 
