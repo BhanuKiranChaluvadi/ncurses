@@ -23,8 +23,9 @@ int main(){
     win1 = create_newwin(10, 10, 0, 0);
     win2 = create_newwin(10, 10, 10, 10);
 
-    box(win1,0,0);
+    box(win1,'*','+');
     box(win2,0,0);
+    refresh();
 
     mvwprintw(win1, 1, 1, "HELLO");
     wrefresh(win1);
@@ -34,12 +35,14 @@ int main(){
     mvwprintw(win2, 1, 1, "HELLO");
     wrefresh(win2);
 
-    wgetch(win1); //Pause
-    wgetch(win2); //Pause
+    // wgetch(win1); //Pause
+    // wgetch(win2); //Pause
 
+    getch();
+
+    endwin();
     delwin(win1);
     delwin(win2);
-    endwin();
 
     return 0;
 }
