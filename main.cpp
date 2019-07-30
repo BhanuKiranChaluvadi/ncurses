@@ -2,6 +2,8 @@
 
 #include <iostream>
 #include <ncurses.h>
+#include <algorithm>
+#include <unistd.h>
 
 using namespace std;
 
@@ -12,13 +14,21 @@ int main() {
     initscr();
     noecho();
 
-    addch('H' | A_UNDERLINE);
-    addch('E' | A_UNDERLINE);
-    addch('L' | A_BOLD);
-    addch('L' | A_BOLD);
-    addch('O' | A_BOLD);
+    string word = "HELLO";
+
+    for(auto ch : word) {
+        if(ch == 'H' || ch == 'E')
+            attron(A_UNDERLINE);
+        else 
+            attron(A_BOLD);
+        printw("%c", ch);
+        refresh();
+        sleep(1);
+    }   
+
     getch();
     endwin();
 
     return 0;
 }
+
