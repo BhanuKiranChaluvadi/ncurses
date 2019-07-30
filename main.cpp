@@ -1,4 +1,4 @@
-// RUN::  g++ -std="c++17" main.cpp -lncurses
+// RUN::  g++ -Wall -std="c++17" main.cpp -lncurses
 
 #include <iostream>
 #include <ncurses.h>
@@ -7,28 +7,34 @@
 
 using namespace std;
 
-int main() {
+WINDOW *create_newwin(int height, int width, int starty, int startx);
 
-    int ch;
-
+int main(){
     initscr();
+    raw();
     noecho();
+    int yMax,xMax;
+    getmaxyx(stdscr,yMax,xMax);
 
-    string word = "HELLO";
+    WINDOW *win1, *win2;
+    win1 = create_newwin(10, xMax-1, 0, 0);
+    win2 = create_newwin(10, xMax-1, 10, 0);
 
-    for(auto ch : word) {
-        if(ch == 'H' || ch == 'E')
-            attron(A_UNDERLINE);
-        else 
-            attron(A_BOLD);
-        printw("%c", ch);
-        refresh();
-        sleep(1);
-    }   
+    box(win1,0,0);
+    box(win2,0,0);
 
-    getch();
+    mvwprintw(win1, 1, 1, "HELLO");
+    wrefresh(win1);
+    wgetch(win1); //Pause
+
+    delwin(win1);
     endwin();
 
     return 0;
+}
+
+
+WINDOW* create_newwin(int height, int width, int starty, int startx) {
+    return newwin(height, width, starty, startx);
 }
 
